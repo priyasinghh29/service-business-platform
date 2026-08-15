@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.4-fpm
 
 WORKDIR /var/www
 
@@ -40,7 +40,6 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY . .
 
-RUN if [ -f .env.example ] && [ ! -f .env ]; then cp .env.example .env; fi
 
 RUN composer install --no-dev --optimize-autoloader
 

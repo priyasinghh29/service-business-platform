@@ -1,0 +1,46 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: oknitech-laravel
+    restart: unless-stopped
+    working_dir: /var/www
+    env_file:
+      - .env
+    volumes:
+      - storage_data:/var/www/storage
+    depends_on:
+      - redis
+    networks:
+      - oknitech
+
+  nginx:
+    image: nginx:alpine
+    container_name: oknitech-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - storage_data:/var/www/storage
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+    networks:
+      - oknitech
+
+  redis:
+    image: redis:alpine
+    container_name: oknitech-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - oknitech
+
+networks:
+  oknitech:
+
+volumes:
+  storage_data:
+  redis_data:
