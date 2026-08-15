@@ -1,0 +1,34 @@
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build output
+LaraBackend/public/build/
+LaraBackend/public/hot
+NextUI/.next/
+NextUI/out/
+
+# Laravel
+LaraBackend/storage/*.key
+LaraBackend/bootstrap/cache/*.php
+!LaraBackend/bootstrap/cache/.gitignore
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Docker volumes
+mysql_data/
